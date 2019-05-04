@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ta5Fabrixs</title>
+    <!--Styles.Render("~/Content/css")-->
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/style.css">
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+</head>
+<body>
+    <!--<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>-->
+    @{Html.RenderAction("MainMenu", "Home");}
+    @RenderBody()
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 paragraph-links">
+                <hr>
+                more info
+                <hr>
+                <p id="searchPopUp" onclick="searchPopUp()">SEARCH</p>
+                <div id="searchForm">
+                    @using (Html.BeginForm("Search", "Catalogue", FormMethod.Get, new { role = "form", enctype = "multipart/form-data" }))
+                    {
+                        <input style="width:100%" name="For" placeholder="Enter keywords"><br /><br />
+                        <input type="submit" class="submitfornewspaper" style="width:100%" value="SEARCH!">
+                    }
+                    <br>
+                </div>
+                <!--
+                    <p>OUR WHY?</p>
+                    <p>SHIPPING</p>
+                    <p>EXCHANGES & RETURNS</p>
+                -->
+            </div>
+            <div class="col-md-3">
+                <a href="https://www.instagram.com/ta5fabrixs"><i class="fa fa-instagram" style="font-size:24px"></i></a>
+                <!--<i class="material-icons" style="font-size:24px">mail</i>-->
+            </div>
+            <div class="col-md-3">
+                <hr>
+                Join The Ta5Fabrixs Club!
+                <hr>
+                <p>Subscribe for exclusive updates & product releases.</p>
+                <!--<form id="newsletter">
+                    <input type="email" id="mailName" pattern="[^ &#64;]*&#64;[^ &#64;]*" style="width:100%" placeholder="Enter your email address. . ."><br><br>
+                    <input id="mailNameSubmit" class="submitfornewspaper" onclick="ch4sls()" type="submit" value="SIGN UP" style="width:100%">
+                </form>-->
+
+                <div id="mc_embed_signup">
+                    <form action="https://gogotest.us19.list-manage.com/subscribe/post?u=e2f747cac06b879a349441fb5&amp;id=ad840124ce" 
+                          method="post" 
+                          id="mc-embedded-subscribe-form" 
+                          name="mc-embedded-subscribe-form" 
+                          class="validate" 
+                          target="_blank" 
+                          novalidate>
+                        <div id="mc_embed_signup_scroll">
+
+                            <div class="mc-field-group">
+                                <input type="email" style="width:100%"  value="" name="EMAIL" class="required email" id="mce-EMAIL"  placeholder="Enter your email address. . .">
+                                <br /><br />
+                            </div>
+                            <div id="mce-responses" class="clear">
+                                <div class="response" id="mce-error-response" style="display:none"></div>
+                                <div class="response" id="mce-success-response" style="display:none"></div>
+                            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e2f747cac06b879a349441fb5_ad840124ce" tabindex="-1" value=""></div>
+                            <div class="clear">
+                                <input id="mailNameSubmit" class="submitfornewspaper" onclick="ch4sls()" type="submit" name="subscribe" value="SIGN UP" style="width:100%">
+                                <!--<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; fnames[3] = 'ADDRESS'; ftypes[3] = 'address'; fnames[4] = 'PHONE'; ftypes[4] = 'phone'; fnames[5] = 'BIRTHDAY'; ftypes[5] = 'birthday'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+                <!--End mc_embed_signup-->
+
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/CarouselControl.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/4k4sls.js"></script>
+    <script src="~/Scripts/search.js"></script>
+</body>
+</html>

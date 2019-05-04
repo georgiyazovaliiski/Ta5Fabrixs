@@ -1,0 +1,53 @@
+﻿@model Store.Model.Models.Product
+Create <b>@Model.Category.Name</b><hr />
+@using (Html.BeginForm("CreateItem", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.CategoryId);
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(m => m.Quantity)
+            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @type = "number", @value = 0, @required = true })
+            @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="exampleInputEmail1">Price EU</label>
+            @Html.TextBoxFor(m => m.PriceEU, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.PriceEU, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="exampleInputEmail1">Size</label>
+            @Html.DropDownList("Size",
+                    new SelectList(Enum.GetValues(typeof(Store.Model.Models.Size))),
+                    "Select Size",
+                    new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Size, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Tags</label>
+        @Html.TextAreaFor(m => m.TagsText, new { @class = "form-control", @type = "text", @placeholder = "Eg.: tag1,tag2,tag3" })
+        @Html.ValidationMessageFor(m => m.TagsText, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Files, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Files, "", new { @type = "file", @multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.Files, "", new { @class = "text-danger" })
+            <p class="help-block">Only gif or jpeg.</p>
+        </div>
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-default">Create Item</button>
+        </div>
+    </div>
+}

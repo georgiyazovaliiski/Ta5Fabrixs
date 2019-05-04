@@ -1,0 +1,47 @@
+﻿@model List<Store.Model.Models.Product>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    @if (Model.Count > 0 && Model != null)
+    {
+        foreach (Store.Model.Models.Product product in Model)
+        {
+    <div class="col-md-3">
+        <a href="@Url.Action("Item", "Catalogue", new { id = product.Id })">
+            @if (product.Images.Count > 0)
+            {
+                <img style="width:100%; height:210px; margin:auto" src="~/Content/Images/ProductImages/@product.Images[0].UrlName" />
+            }
+            else
+            {
+                <img style="width:100%; height:210px; margin:auto" src="~/Content/Images/ProductImages/notfound.jpg" />
+            }
+            <p>@product.Name</p>
+
+
+            <p>
+                @if (product.Quantity == 0)
+                {<span>Sold Out - </span>}@if (product.Promo != null)
+                {<span class="money currency">@product.PriceEU EUR</span> <strike class="currency">@product.OriginalPriceEU EUR</strike>}
+            else
+            { <span class="money currency">@product.PriceEU EUR</span>}
+            </p>
+            @if (product.Promo != null)
+            {
+                <div class="sale">
+                    SALE
+                </div>
+            }
+            else
+            {
+                <div class="sale">
+                    HOT
+                </div>
+            }
+        </a>
+    </div>
+    }
+    }
+</div>

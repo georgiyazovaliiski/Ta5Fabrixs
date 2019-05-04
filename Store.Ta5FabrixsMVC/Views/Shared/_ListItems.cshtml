@@ -1,0 +1,29 @@
+﻿@model List<Store.Model.Models.Product>
+List of all items of that category!
+<div class="row">
+    <div class="col-md-12">
+        <table class="tableofdetail">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price EU</th>
+                <th>Price LV</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="detail">@item.Name</td>
+                    <td class="detail">@if (item.Description.Length > 15) { <span>@item.Description.Substring(0, 15) ...</span>} else { <span>@item.Description</span> }</td>
+                    <td class="detail">@item.PriceEU</td>
+                    <td class="detail">@{ var pricelv = item.PriceEU * 2; } @pricelv</td>
+                    <td class="detail">@item.Size</td>
+                    <td class="detail">@item.Quantity</td>
+                    <td><i class="fa fa-edit show-edit-form detail" id="edit-@item.Id"></i> <a href="@Url.Action("Remove","Admin", new { Id = item.Id })"><i class="fa fa-remove detail"></i></a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

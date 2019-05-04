@@ -1,0 +1,30 @@
+﻿@model Store.Model.Models.ProductCategory
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">ADMIN PANEL</div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{Html.RenderAction("AdminOptionsMenu", "Admin");}
+        </div>
+        <div class="col-md-5">
+            Instructions: Fill all the fields, otherwise you will be redirected on this same page, with nothing changed.<br />
+            @if (!Model.UrlImage.Equals("NoErrors")) { <span>Error: @foreach (var error in Model.UrlImage.Split('.').ToArray()) { @error <br /> }</span> }
+            @{Html.RenderAction("CreateItem", "Admin", new { Category = Model.Name });}
+        </div>
+        <div class="col-md-5">
+            @{Html.RenderAction("ListItems", "Admin", new { Category = Model.Name });}
+        </div>
+    </div>
+</div>
+<div id="edit-form" style="display:none">
+    @{Html.RenderAction("EditItem", "Admin");}
+</div>
+<script src="~/Scripts/ProductEditControl.js"></script>

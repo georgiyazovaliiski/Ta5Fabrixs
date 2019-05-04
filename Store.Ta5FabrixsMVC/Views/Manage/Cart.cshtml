@@ -1,0 +1,116 @@
+﻿@model Store.Model.Models.Cart
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 text-left">
+            cart<br>
+            <hr>
+            products<br>
+            <hr>
+            @foreach (var p in Model.ProductsInCart.Where(a => a.OrderId == null))
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (p.Product.Images.Count > 0)
+                        {
+                            <a href="@Url.Action("Item", "Catalogue", new { id = p.ProductId })" class="thumbnail">
+                                <img src="~/Content/Images/ProductImages/@p.Product.Images[0].UrlName" alt="main-picture" style="width:100%">
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Item", "Catalogue", new { id = p.ProductId })" class="thumbnail">
+                                <img src="~/Content/Images/ProductImages/notfound.jpg" alt="main-picture" style="width:100%">
+                            </a>
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <h3><a href="@Url.Action("Item", "Catalogue", new { id = p.ProductId })">@p.Product.Name</a></h3>
+                        <h5>@p.Product.Description</h5>
+                        <h5>Single Price: <span class="currency">@p.Product.PriceEU &#8364;</span></h5>
+                        <h5>Quantity:<br /><br /> <input type="number" id="@p.Id" class="form-control quantity-control" min="1" value="@p.Quantity"></h5>
+                        <h5>Subtotal For Product: @{var subtotal = p.Product.PriceEU * p.Quantity; } <span class="currency">@subtotal &#8364;</span></h5>
+                        <h5><a href="@Url.Action("RemoveItemFromCart","Manage",new { id = p.Id })"><i class="fa fa-remove detail"></i> Remove</a></h5>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-4 text-right">
+            <a href="#">
+                <a href="@Url.Action("Index","Home")">Continue Shopping -></a><hr>
+                <div class="text-left">
+                    subtotal<hr>
+                            <span class="currency">@Model.ProductsInCart.Select(b => b.Product.PriceEU * b.Quantity).ToArray().Sum() &#8364;</span><br><br>
+                    <i>Excluding tax and shipping</i><br><br>
+                    Orders will be processed in EUR<br><br>
+                    Note to Ta5Fabrixs :<br><br>
+                    <form>
+                        <textarea class="form-control" name="notes" rows="3" cols="5" style="resize:none"></textarea>
+                        <br>
+                        @if (Model.ProductsInCart.Count > 0)
+                        {
+                            <a href="@Url.Action("Checkout", "Catalogue")" style="width:100%" class="btn btn-default submitfornewspaper">CHECKOUT</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Home")" style="width:100%" class="btn btn-default submitfornewspaper">CONTINUE SHOPPING</a>
+                        }
+                    </form>
+                </div>
+        </div>
+        <!--<div class="col-md-12">
+          <hr>
+            <h3>shipping rates calculator</h3>
+          <hr>
+          <form class="form-inline" action="/action_page.php">
+            <div class="form-group">
+              <label for="Country">Country: </label><br>
+              <select class="form-control" id="country">
+                <option>Country1</option>
+                <option>Country2</option>
+                <option>Country3</option>
+                <option>Country4</option>
+                <option>Country5</option>
+                <option>Country6</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Zip / Postal Code:</label><br>
+              <input type="password" class="form-control" id="pwd">
+            </div>
+            <div class="form-group"><br>
+            <button type="submit" class="btn btn-default" style="border:0;">Calculate Shipping Rates</button>
+          </div>
+          </form>
+        </div>-->
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+
+        </div>
+    </div>
+    <div class="col-md-5">
+
+    </div>
+</div>
+    </div>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+
+    </div>
+</div>
+<script src="~/Scripts/CartControl.js"></script>

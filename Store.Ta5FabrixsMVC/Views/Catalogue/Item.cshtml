@@ -1,0 +1,127 @@
+﻿@model Store.Model.Models.Product
+    @{ 
+        ViewBag.Title = Model.Name;
+    }
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">Home / Products / @Model.Name</div>
+        <div class="col-md-6 text-right">
+            <!--<a href="#"> <- Prev</a> | <a href="#">Next -></a>-->
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <a href="#" class="thumbnail">
+
+                @if (Model.Images.Count > 0)
+                {
+                    <img id="headImg" src="~/Content/Images/ProductImages/@Model.Images[0].UrlName" alt="main-picture" style="height:400px">
+                }
+                else
+                {
+                    <img src="~/Content/Images/ProductImages/notfound.jpg" alt="main-picture" style="height:400px">
+                }
+            </a>
+            <div class="row">
+                @if (Model.Images.Count > 0)
+                {
+                    foreach (var i in Model.Images)
+                    {
+                    <div class="col-md-2">
+                        <a href="#" class="thumbnail">
+                            <img src="~/Content/Images/ProductImages/@i.UrlName" alt="main-picture">
+                        </a>
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-5">
+            @if (Model.Promo == null)
+            {
+                <h3>@Model.Name</h3>
+                <p>Price: <span class="highlighted currency">@Model.PriceEU &#8364;</span></p>
+            }
+            else
+            {
+                <h3>@Model.Name</h3>
+                <p>This item is on <b>Sale</b>: <span class="highlighted currency">@Model.PriceEU &#8364;</span> - old price: <strike style="color:darkred"><span class="currency">@Model.OriginalPriceEU &#8364;</span></strike></p>
+            }
+
+            <!-- CHECK IF SOLD OUT -->
+            @if (Model.Quantity == 0)
+            {
+                <h3>Sold Out</h3>
+                <p>This size (@Model.Size) of this Item has been sold out! <br />Notify me when this product is available:</p>
+                <input type="email" style="padding:4px; width:55%; display:inline-block" class="form-control" placeholder="Enter your email address...">
+                <input class="submitfornewspaper" style="padding:7px" type="submit" value="SEND"><br><br>
+            }
+            <!---->
+
+            <form action="/Catalogue/ListSizes/" method="post">
+                @Html.HiddenFor(model => model.PriceEU)
+                <p>size:</p>
+                <select class="form-control" name="ProdId" style="width:100%">
+                    <optgroup label="Current chosen size">
+                        @if (Model.Quantity == 0)
+                        {
+                            <option>@Model.Size - Sold out</option>
+                        }
+                        else
+                        {
+                            <option value="@Model.Id">@Model.Size</option>
+                        }
+                    </optgroup>
+                    @{Html.RenderAction("ListSizes", "Catalogue", new
+                        {
+                            Name = Model.Name
+                        });}
+                </select><br>
+                <p>quantity:</p>
+                <input class="form-control" type="number" name="Quantity" placeholder="quantity" value="1" min="1" max="100" />
+                <br />
+                <input class="submitfornewspaper" style="padding:7px; width:100%" type="submit" value="ADD TO CART">
+            </form>
+            <br>
+            <br>
+            <ul class="list-inline">
+                <li class="description-item clicked">Description</li>
+                <li class="description-item">Shipping</li>
+                <li class="description-item">Returns & Exchanges</li>
+            </ul>
+            <div class="description-text">
+                @Model.Description
+            </div>
+            <br>
+            <!--
+    <div class="share-item">
+        Share:
+    </div>
+        -->
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+            <h3 class="text-center">related items</h3>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class="container">
+    @{Html.RenderAction("RelatedItems", "Catalogue", new
+        {
+            Id = Model.Id
+        });}
+</div>
+<script>
+$(".thumbnail").click(function(){
+$("#headImg").attr("src", $(this).find("img").attr("src"));
+})
+</script>

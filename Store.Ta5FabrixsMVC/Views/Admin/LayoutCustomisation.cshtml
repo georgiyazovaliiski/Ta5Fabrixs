@@ -1,0 +1,25 @@
+﻿@model Store.Model.Models.ProductCategory
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">ADMIN PANEL</div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{Html.RenderAction("AdminOptionsMenu", "Admin");}
+        </div>
+        <div class="col-md-10">
+            @{Html.RenderAction("CustomisationSection", "Admin");}
+        </div>
+    </div>
+</div>
+<div id="edit-form" style="display:none">
+    @{Html.RenderAction("EditItem", "Admin");}
+</div>
+<script src="~/Scripts/ProductEditControl.js"></script>

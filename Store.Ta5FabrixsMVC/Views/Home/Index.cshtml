@@ -1,0 +1,83 @@
+﻿@model Store.Ta5FabrixsMVC.ViewModels.LayoutViewModel
+@{
+    ViewBag.Title = "Home";
+}
+<link rel="stylesheet" type="text/css" href="../../../Content/mediaQueryMainScreen.css">
+@if (!Model.Message.Equals(""))
+{
+    if (Model.Message.Equals("OrderPlaced"))
+    {
+        <div class="messagebox" style="display: none;
+    position: fixed;
+    top: 15%;
+    left:25%;
+    right:25%;
+    width: 50%;
+    background: rgba(155,155,155,0.8);
+    color: white;
+    text-align:center;
+    margin:auto;
+    z-index:20;
+    padding:25px;
+    border:1px solid gray;
+    ">
+            <h2>Your order has been placed successfully, we are going to contact you soon!</h2>
+        </div>
+    }
+}
+<div class="outer">
+    <div class="carousel">
+        <img class="carousel-image" src="~/Content/Images/FrontImages/@Model.Banner1Url" />
+        <img class="carousel-image" src="~/Content/Images/FrontImages/@Model.Banner2Url" />
+        <img class="carousel-image" src="~/Content/Images/FrontImages/@Model.Banner3Url" />
+    </div>
+</div>
+<div class="carousel-buttons text-center">
+    <div class="carousel-button current" id="offer1">-</div>
+    <div class="carousel-button" id="offer2">-</div>
+    <div class="carousel-button" id="offer3">-</div>
+</div>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="collection-link text-center" style="background: url(../Content/Images/CategoryImages/@Model.FrontCategory1.UrlImage);
+    background-size: cover;">
+                <a href="@Url.Action("Index","Catalogue",new { Collection = Model.FrontCategory1.Name })">@Model.FrontCategory1.Name</a>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="collection-link text-center" style="background: url(../Content/Images/CategoryImages/@Model.FrontCategory2.UrlImage);
+    background-size: cover;">
+                <a href="@Url.Action("Index","Catalogue",new { Collection = Model.FrontCategory2.Name })">@Model.FrontCategory2.Name</a>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="collection-link text-center" style="background: url(../Content/Images/CategoryImages/@Model.FrontCategory3.UrlImage);
+    background-size: cover;">
+                <a href="@Url.Action("Index","Catalogue",new { Collection = Model.FrontCategory3.Name })">@Model.FrontCategory3.Name</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>New Releases</h3>
+        </div>
+        <div class="col-md-12 text-center" id="newReleases">
+            <a href="@Url.Action("NewReleases","Catalogue")"><img src="~/Content/Images/FrontImages/@Model.NewReleasesBannerUrl" /></a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    @{Html.RenderAction("ListSales", "Catalogue");}
+</div>
+<script>
+    $("document").ready(function () {
+        $(".messagebox").fadeIn(100);
+        setTimeout(function () { $(".messagebox").fadeOut(2500) }, 1000);
+
+        setTimeout(function () { $(".messagebox").remove() }, 3600);
+    })
+</script>

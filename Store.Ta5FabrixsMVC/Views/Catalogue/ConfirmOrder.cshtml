@@ -1,0 +1,41 @@
+﻿@model Store.Model.Models.Order
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 text-left">
+            finish order<br>
+            <hr>
+            @if (Model.PaymentMethod == Store.Model.Models.PaymentMethod.Econt)
+            {
+                <form method="post" action="Catalogue/FinishOrder">
+                    <input type="checkbox" name="iagree" required value="I Agree with the Terms and Conditions of Ta5Fabrixs" />
+                    @Html.HiddenFor(a => a)
+                    <input type="submit" class="btn btn-default submitfornewspaper" value="FINISH ORDER" />
+                </form>
+            }
+            else
+            {
+                <input type="checkbox" name="iagree" required value="I Agree with the Terms and Conditions of Ta5Fabrixs" />
+                <form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+                    <input type="hidden" name="upload" value="1" />
+                    <input type="hidden" name="return" value="@Url.Action("FinishOrder", "Catalogue", new { order = Model })" />
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="business" value="starting_-facilitator@abv.bg" />
+                    @{ int i = 1; }
+                    @foreach (var p in Model.ProductsInCart)
+                    {
+                        <input type="hidden" name="item_name_@i" value="@p.Product.Name" />
+                        <input type="hidden" name="item_number_@i" value="@p.Id" />
+                        <input type="hidden" name="amount_@i" value="@p.Product.PriceEU" />
+                        <input type="hidden" name="quantity_@i" value="@p.Quantity" />
+                        i++;
+                    }
+                    <input type="submit" value="FINISH ORDER" class="btn btn-default submitfornewspaper" />
+                </form>
+            }
+        </div>
+        <div class="col-md-4 text-right">
+            <a href="#">Continue Shopping -></a><hr>
+        </div>
+    </div>
+</div>

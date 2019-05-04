@@ -1,0 +1,24 @@
+﻿@model Store.Model.Models.ProductCategory
+@using (Html.BeginForm("EditCategory", "Admin", FormMethod.Post, new { @id = "edit-form", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group" style="display:none">
+        @Html.Label("Identity Number")
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control emptiable-field", @id = "edit-item-id" })
+        @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control emptiable-field", @id = "edit-item-name" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            @Html.Label("Banner Image", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.File, "", new { @type = "file", @name = "Files", @multiple = "multiple", @class = "emptiable-field" })
+            <p class="help-block">Only gif or jpeg.</p><br />
+            <button type="submit" class="btn btn-default">Finish Edit</button>
+            <button type="button" id="close-edit-form" class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+}

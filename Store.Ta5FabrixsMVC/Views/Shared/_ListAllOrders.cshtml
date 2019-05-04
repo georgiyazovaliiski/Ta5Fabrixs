@@ -1,0 +1,62 @@
+﻿@model List<Store.Model.Models.Order>
+
+List of all orders - When clicked review it shows details on the left!<br /><hr />
+Newest Orders are placed on top and are all sorted by the state.<br /><hr />
+<div class="row">
+    <div class="col-md-12">
+        <table class="tableofdetail">
+            <tr>
+                <th>Name Of Customer</th>
+                <th>Country / City</th>
+                <th>Date of Order</th>
+                <th>Whole Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            @if (Model.Count > 0)
+            {
+                foreach (var order in Model)
+                {
+                    if (order.Status == Store.Model.Models.Status.Done)
+                    {
+                        <tr style="background:#c0ced7; color:#3b3b3b; opacity:0.5">
+                            <td class="detail">@order.FirstName @order.LastName</td>
+                            <td class="detail">@order.City, @order.Country</td>
+                            <td class="detail">@order.OrderCreation</td>
+                            <td class="detail">@order.WholePrice &#8364;</td>
+                            <td class="detail">@order.Status</td>
+                            <td class="detail"><a href="@Url.Action("Orders", "Admin", new { id = order.Id })"><i class="fa fa-edit"></i> Review</a></td>
+                        </tr>
+                    }
+                    else if (order.Status == Store.Model.Models.Status.InProcess)
+                    {
+                        <tr style="background:#d0d0d0">
+                            <td class="detail">@order.FirstName @order.LastName</td>
+                            <td class="detail">@order.City, @order.Country</td>
+                            <td class="detail">@order.OrderCreation</td>
+                            <td class="detail">@order.WholePrice &#8364;</td>
+                            <td class="detail">@order.Status</td>
+                            <td class="detail"><a href="@Url.Action("Orders", "Admin", new { id = order.Id })"><i class="fa fa-edit"></i> Review</a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="background:#FFF; color:#ae0095">
+                            <td class="detail">@order.FirstName @order.LastName</td>
+                            <td class="detail">@order.City, @order.Country</td>
+                            <td class="detail">@order.OrderCreation</td>
+                            <td class="detail">@order.WholePrice &#8364;</td>
+                            <td class="detail">@order.Status</td>
+                            <td class="detail"><a href="@Url.Action("Orders", "Admin", new { id = order.Id })"><i class="fa fa-edit"></i> Review</a></td>
+                        </tr>
+                    }
+
+                }
+            }
+            else
+            {
+                <h2>There are no orders at this moment!</h2>
+            }
+        </table>
+    </div>
+</div>

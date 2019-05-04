@@ -1,0 +1,24 @@
+﻿@model Store.Model.Models.ProductCategory
+@{
+    ViewBag.Title = "Orders";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">ADMIN PANEL</div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{Html.RenderAction("AdminOptionsMenu", "Admin");}
+        </div>
+        <div class="col-md-5">
+            @{Html.RenderAction("OrdersSection", "Admin");}
+        </div>
+        <div class="col-md-5">
+            @{Html.RenderAction("ListAllOrders", "Admin");}
+        </div>
+    </div>
+</div>

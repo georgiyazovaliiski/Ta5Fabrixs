@@ -1,0 +1,68 @@
+﻿@model List<Store.Model.Models.Promo>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">Home / Tees / Page 1 of 1</div>
+        <div class="col-md-6 text-right">
+            
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            Sale
+        </div>
+        <div class="col-md-12 text-center">
+            <img style="width:85%; height:250px; margin:auto" src="~/Content/Images/FrontImages/NewReleases.jpg" />
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>@{ var notfound = "notfound.jpg"; }
+
+    <div class="row">
+        @if (Model.Count > 0)
+        {
+            foreach (var p in Model)
+            {
+                <div class="col-md-3">
+                    <a href="@Url.Action("Item", "Catalogue", new { id = p.ProductId })">
+                        <img style="width:100%; height:210px; margin:auto" src="~/Content/Images/ProductImages/@if (p.Product.Images.Count > 0) { @p.Product.Images[0].UrlName } else { @notfound }" />
+                    </a>
+                    <a href="@Url.Action("Item", "Catalogue", new { id = p.ProductId })">
+                        <h3>@p.Product.Name</h3>
+                    </a>
+                    <!-- CHECK IF SOLD OUT LATER -->
+                    <!--<p>Sold Out</p> -->
+                    <p>
+                        <span class="money currency">@p.Product.PriceEU &#8364;</span> @if (p.Product.PriceEU != p.Product.OriginalPriceEU)
+                        {<strike><span class="currency">@p.Product.OriginalPriceEU &#8364;</span></strike>}
+                    </p>
+                    <!--CHECK IF ON SALE-->
+
+
+                    @if (p.Product.PriceEU != p.Product.OriginalPriceEU)
+                    {
+                        <div class="sale">
+                            SALE
+                        </div>
+                    }
+
+
+                </div>
+            }
+        }
+        else
+        {
+            <span>No sale items! :/</span>
+        }
+    </div>
+</div>
+

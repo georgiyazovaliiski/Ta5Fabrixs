@@ -1,0 +1,34 @@
+﻿@model Store.Model.Models.Order
+@if (Model != null)
+{
+<div class="order-details">
+    <h4>ID: <span class="highlighted">@Model.Id</span></h4>
+    <h4>Name of Customer: <span class="highlighted">@Model.FirstName @Model.LastName</span></h4>
+    <h4>Country: <span class="highlighted">@Model.Country</span></h4>
+    <h4>City: <span class="highlighted">@Model.City</span></h4>
+    <h4>Zip Code: <span class="highlighted">@Model.ZipCode</span></h4>
+    <h4>Phone: <span class="highlighted">@Model.Phone</span></h4>
+    <h4>Date of Order: <span class="highlighted">@Model.OrderCreation</span></h4>
+    <h4>Payment Method: <span class="highlighted">@Model.PaymentMethod</span></h4>
+    <h4>Products: </h4>
+    <ul>
+        @foreach (var product in Model.ProductsInCart)
+        {
+            <li>@product.Product.Name / Single Price: @product.SinglePrice &#8364; / @product.Quantity pieces / Subtotal: @product.SubtotalForProduct &#8364; / Size: @product.Product.Size</li>
+        }
+    </ul>
+    <h4>Whole Price: <span class="highlighted">@Model.WholePrice &#8364;</span></h4>
+    <br>
+    <h3>Status: <span class="highlighted">@Model.Status</span></h3><br /><br />
+    @if (Model.Status == Store.Model.Models.Status.Awaiting || Model.Status == Store.Model.Models.Status.InProcess)
+    {
+        <a href="/Admin/FinishOrder/@Model.Id" type="submit" class="submitfornewspaper">FINISH ORDER</a>
+    }
+    <a href="/Admin/RemoveOrder/@Model.Id" type="submit" class="submitfornewspaper">REMOVE ORDER</a>
+</div>
+}
+else
+{
+    <h2>You have not selected an order</h2>
+}
+<br /><br />

@@ -1,0 +1,234 @@
+﻿* {
+    font-family: 'Oswald', sans-serif;
+}
+
+p {
+    font-family: 'Oswald', sans-serif;
+}
+.navbar {
+    min-height: 80px;
+    border: 0;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.active a {
+    background-color: none;
+}
+
+.adminmenu li {
+    transition: 0.2s all ease-in-out;
+}
+
+    .adminmenu li:hover {
+        transform: translate(3px,0);
+        -webkit-transform: translate(3px,0); /** Chrome & Safari **/
+        -o-transform: translate(3px,0); /** Opera **/
+        -moz-transform: translate(3px,0); /** Firefox **/
+    }
+
+.submitfornewspaper {
+    background: black;
+    color: white;
+    padding: 14px;
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s all ease;
+}
+
+    .submitfornewspaper:hover {
+        background: gray;
+        color: white;
+        padding: 14px;
+        border: none;
+    }
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 120px;
+    line-height: 120px;
+    font-size: 2.5em;
+}
+
+.navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 36.5px;
+    padding: 9px 10px !important;
+}
+
+.sale {
+    position: absolute;
+    bottom: 190px;
+    left: -1px;
+    background: #282c30;
+    color: white;
+    padding: 15px;
+}
+
+.money {
+    color: #af1f31;
+}
+
+.option-input {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+}
+
+.carousel-buttons {
+    position: relative;
+    bottom: 50px;
+}
+
+.carousel-button {
+    display: inline-block;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.4);
+    width: 40px;
+    font-size: 0.4em;
+}
+
+    .carousel-button:hover {
+        cursor: pointer;
+    }
+
+.current {
+    color: rgba(255,255,255,1);
+    background: rgba(255,255,255,1);
+}
+
+.tableofdetail tr th {
+    background: lightgray
+}
+
+.tableofdetail tr td, .tableofdetail tr th {
+    padding: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+    .tableofdetail .detail:hover, .tableofdetail tr th:hover {
+        color: gray
+    }
+
+.tableofdetail .detail:hover {
+    cursor: pointer;
+}
+
+.tableofdetail tr {
+    border-bottom: 1px solid gray;
+}
+
+.outer {
+    overflow: hidden;
+}
+
+.carousel {
+    width: 300%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.carousel-image {
+    margin: 0;
+    display: inline-block
+}
+
+.collection-link {
+    background-image: url("../Content/Images/banner.jpg"), linear-gradient(rgba(0,0,0,0.8), rgba(255,255,255,0.8));
+    padding: 40px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+.highlighted {
+    color: gray
+}
+
+.collection-link a {
+    color: white;
+    text-shadow: 2px 2px #282c30;
+    transition: 0.2s all ease;
+}
+
+    .collection-link a:hover {
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+    }
+
+    .collection-link a:active {
+        text-shadow: 2px 2px #282c30;
+    }
+
+.alpha {
+    margin-left: 0
+}
+
+.omega {
+    margin-right: 0;
+}
+
+.sale2 {
+    position: absolute;
+    bottom: 280px;
+    left: -1px;
+    background: #282c30;
+    color: white;
+    padding: 15px;
+}
+
+.messagebox {
+
+}
+
+.description-item {
+    background: rgba(230,230,230);
+    margin: 0;
+    padding: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .description-item:hover {
+        cursor: pointer
+    }
+
+    .description-item.clicked {
+        background: white;
+        border-bottom: 3px solid rgba(230,230,230);
+    }
+
+#edit-form {
+    position: fixed;
+    padding: 30px;
+    top: 20%;
+    left: 50%;
+    width: 30em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    height:500px;
+    z-index: 10;
+    overflow:visible;
+}
+.hidden-text {
+    display: n;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        /* (80px - line-height of 27px) / 2 = 26.5px */
+        padding-top: 39.75px;
+        padding-bottom: 39.75px;
+        line-height: 40.5px;
+    }
+}

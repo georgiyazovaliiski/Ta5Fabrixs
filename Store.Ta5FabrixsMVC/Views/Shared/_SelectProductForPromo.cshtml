@@ -1,0 +1,13 @@
+﻿@model List<Store.Model.Models.ProductCategory>
+    <label for="exampleInputEmail1">Choose Product</label>
+    <select class="form-control" name="ProductId">
+        @foreach (var cat in Model)
+        {
+            <optgroup label="@cat.Name">
+                @foreach (var option in cat.Products)
+                {
+                <option value="@option.Id">@option.Name - &#8364;@option.PriceEU / @{ var pricelv = option.PriceEU * 2; } @pricelv лв. - Size: @option.Size</option>
+                }
+            </optgroup>
+        }
+    </select>

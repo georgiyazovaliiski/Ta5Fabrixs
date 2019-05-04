@@ -1,0 +1,10 @@
+﻿/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .navbar {
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        z-index: 2;
+        background-image: linear-gradient(rgb(255,255,255),rgba(255,255,255,0.7));
+    }
+}

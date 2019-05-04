@@ -1,0 +1,26 @@
+﻿@model List<Store.Model.Models.Promo>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    @foreach (var promo in Model)
+    {
+        <div class="col-md-4">
+            <a href="@Url.Action("Item", "Catalogue", new { id = promo.ProductId })">
+                @if (promo.Product.Images.Count > 0)
+                {
+                    <img style="width:100%; height:350px; margin:auto" src="~/Content/Images/ProductImages/@promo.Product.Images[0].UrlName " /><h3>@promo.Product.Name</h3>
+                }
+                else
+                {
+                    <img style="width:100%; height:350px; margin:auto" src="~/Content/Images/ProductImages/notfound.jpg" /><h3>@promo.Product.Name</h3>
+                }
+                <p>Almost Sold Out - <span class="money currency">@promo.Product.PriceEU &#8364;</span> <strike><span class="currency">@promo.Product.OriginalPriceEU &#8364;</span></strike></p>
+                <div class="sale2">
+                    SALE
+                </div>
+            </a>
+        </div>
+    }
+</div>

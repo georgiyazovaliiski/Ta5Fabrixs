@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-left">ADMIN PANEL</div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{Html.RenderAction("AdminOptionsMenu", "Admin");}
+        </div>
+        <div class="col-md-5">
+            @{Html.RenderAction("CreatePromo", "Admin");}
+        </div>
+        <div class="col-md-5">
+            @{Html.RenderAction("ListPromos", "Admin");}
+        </div>
+    </div>
+</div>
+<div id="edit-form" style="display:none">
+    @{Html.RenderAction("EditItem", "Admin");}
+</div>
+<script src="~/Scripts/ProductEditControl.js"></script>

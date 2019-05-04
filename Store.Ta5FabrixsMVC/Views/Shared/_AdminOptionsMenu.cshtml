@@ -1,0 +1,17 @@
+﻿@model List<Store.Model.Models.ProductCategory>
+<ul style="list-style-type:none" class="adminmenu">
+    @foreach (var m in Model)
+    {
+        <li><a href="@Url.Action("Items","Admin", new { Category = m.Name })">@m.Name</a></li>
+    }
+    <hr>
+    <li><a href="@Url.Action("Categories","Admin")">Categories</a></li>
+    <hr>
+    <li><a href="@Url.Action("Orders","Admin")">Orders</a></li>
+    <hr>
+    <li><a href="@Url.Action("Promos","Admin")"">Promotions</a></li>
+    <hr>
+    <li><a href="@Url.Action("Promos","Admin")"">Users</a></li>
+    <hr>
+    <li><a href="@Url.Action("LayoutCustomisation","Admin")">Layout Customisation</a></li>
+</ul>

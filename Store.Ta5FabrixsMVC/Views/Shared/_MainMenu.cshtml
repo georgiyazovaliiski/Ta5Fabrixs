@@ -1,0 +1,31 @@
+﻿@model List<Store.Model.Models.ProductCategory>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Ta5Fabrixs</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                @foreach (var cat in Model)
+                {
+                    <li><a href="@Url.Action("Index", "Catalogue", new { Collection = cat.Name })">@cat.Name.ToLower()</a></li>
+                }
+                <!-- REMEMBER THE ACTIVE CLASS BELOW -->
+                <!--<li class="active"><a href="Url.Action("Index", "Categories")">tees</a></li>-->
+                <li><a href="@Url.Action("Sale", "Catalogue" )">sale</a></li>
+                <li><a href="@Url.Action("NewReleases", "Catalogue")">new releases</a></li>
+                <li><a href="https://www.instagram.com/ta5fabrixs/?hl=en"><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
+                <li><a href="#"><i class="material-icons" style="font-size:20px">mail</i></a></li>
+                <li><a href="#"><i class="material-icons" style="font-size:20px"><select id="currency-controller" style="border:0" onchange="currencyControl()"><option value="EU-1">EU</option><option value="LV-2">LV</option></select></i></a></li>
+                @Html.Partial("_LoginPartial")
+                <li><a href="@Url.Action("Cart", "Manage")"><span class="glyphicon glyphicon-shopping-cart" style="font-size:20px"></span> cart</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

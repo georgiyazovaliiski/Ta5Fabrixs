@@ -1,0 +1,35 @@
+﻿@model Store.Model.Models.Promo
+@using (Html.BeginForm("CreatePromo", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+         @{
+             Html.RenderAction("SelectProductForPromo", "Admin");
+         }
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="exampleInputEmail1">Discount Price in Euro</label>
+            @Html.TextBoxFor(m => m.PromoPriceEU, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PromoPriceEU, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">Start Date</label>
+            @Html.TextBoxFor(m => m.StartDate, new { @type = "datetime-local", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            <label for="exampleInputEmail1">End Date</label>
+            @Html.TextBoxFor(m => m.EndDate, new { @type = "datetime-local", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-default">Create Promo</button>
+        </div>
+    </div>
+}

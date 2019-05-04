@@ -1,0 +1,32 @@
+﻿@model Store.Model.Models.MainCategoryPicker
+<div class="form-group">
+    @{
+        var listCategories = new List<SelectListItem>();
+        listCategories.AddRange(Model.categories.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Id + "." + a.Name }));
+        listCategories.Insert(0, new SelectListItem() { Value = Model.SelectedCategory1.ToString(), Text = "Unchanged option: " + Model.SelectedCategory1 });
+
+        var listCategories2 = new List<SelectListItem>();
+        listCategories2.AddRange(Model.categories.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Id + "." + a.Name }));
+        listCategories2.Insert(0, new SelectListItem() { Value = Model.SelectedCategory2.ToString(), Text = "Unchanged option: " + Model.SelectedCategory2 });
+
+        var listCategories3 = new List<SelectListItem>();
+        listCategories3.AddRange(Model.categories.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Id + "." + a.Name }));
+        listCategories3.Insert(0, new SelectListItem() { Value = Model.SelectedCategory3.ToString(), Text = "Unchanged option: " + Model.SelectedCategory3 });
+     }
+    <label for="exampleInputEmail1">Choose Front Category 1</label>
+    @Html.DropDownList("FrontCategoryBanner1String",
+                    listCategories,
+                    new { @class = "form-control" })
+</div>
+<div class="form-group">
+    <label for="exampleInputEmail1">Choose Front Category 2</label>
+    @Html.DropDownList("FrontCategoryBanner2String",
+                    listCategories2,
+                    new { @class = "form-control" })
+</div>
+<div class="form-group">
+    <label for="exampleInputEmail1">Choose Front Category 3</label>
+    @Html.DropDownList("FrontCategoryBanner3String",
+                    listCategories3,
+                    new { @class = "form-control" })
+</div>

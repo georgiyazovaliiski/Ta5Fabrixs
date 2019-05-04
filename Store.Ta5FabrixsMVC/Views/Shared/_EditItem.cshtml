@@ -1,0 +1,64 @@
+﻿@model Store.Ta5FabrixsMVC.ViewModels.ProductViewModel
+Edit<hr />
+@using (Html.BeginForm("EditItem", "Admin", FormMethod.Post, new { @id = "edit-form", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div style="display:none">
+        @Html.TextBoxFor(m => m.CategoryId, new { @id = "edit-item-catid", @class = "hidden-text" });
+        @Html.TextBoxFor(m => m.Tags, new { @id = "edit-item-tagsreal", @class = "hidden-text" });
+    </div>
+    <div class="form-group">
+        @Html.Label("Identity Number")
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control emptiable-field", @id = "edit-item-id" })
+        @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control emptiable-field", @id = "edit-item-name" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control emptiable-field", @id = "edit-item-description" })
+        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(m => m.Quantity)
+            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control emptiable-field", @type = "number", @value = 0, @id = "edit-item-quantity" })
+            @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="exampleInputEmail1">Price EU</label>
+            @Html.TextBoxFor(m => m.PriceEU, new { @class = "form-control emptiable-field", @id = "edit-item-priceeu" })
+            @Html.ValidationMessageFor(m => m.PriceEU, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-4">
+            <label for="exampleInputEmail1">Size</label>
+            @Html.DropDownList("Size",
+                    new SelectList(Enum.GetValues(typeof(Store.Model.Models.Size))),
+                    "Select Size",
+                    new { @class = "form-control emptiable-field", @id = "edit-item-size" })
+            @Html.ValidationMessageFor(m => m.Size, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Tags</label>
+        @Html.TextAreaFor(m => m.TagsText, new { @class = "form-control emptiable-field", @type = "text", @placeholder = "Eg.: tag1,tag2,tag3", @id = "edit-item-tags" })
+        @Html.ValidationMessageFor(m => m.TagsText, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div id="current-images" class="emptiable-field">
+
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.Label("Images", htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Files, "", new { @type = "file", @name = "Files", @multiple = "multiple", @class = "emptiable-field" })
+            <p class="help-block">Only gif or jpeg.</p><br />
+            <button type="submit" class="btn btn-default">Finish Edit</button>
+            <button type="button" id="close-edit-form" class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+}

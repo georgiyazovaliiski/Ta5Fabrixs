@@ -1,0 +1,8 @@
+﻿@model List<Store.Model.Models.SizeAndProductId>
+<optgroup label="Available Sizes">
+    @foreach (var size in Model)
+    {
+        <option value="@size.productId">@size.size</option>
+    }
+    </optgroup>
+<script src="~/Scripts/sizeControl.js"></script>

@@ -1,0 +1,41 @@
+﻿@model Store.Model.Models.LayoutModel
+
+@using (Html.BeginForm("EditLayout", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+<div class="col-md-5">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(a => a.Banner1Url)
+    @Html.HiddenFor(a => a.Banner2Url)
+    @Html.HiddenFor(a => a.Banner3Url)
+    @Html.HiddenFor(a => a.NewReleasesBannerUrl)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Banner1, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Banner1, "", new { @type = "file" })
+        @Html.ValidationMessageFor(model => model.Banner1, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Banner2, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Banner2, "", new { @type = "file" })
+        @Html.ValidationMessageFor(model => model.Banner2, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Banner3, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Banner3, "", new { @type = "file" })
+        @Html.ValidationMessageFor(model => model.Banner3, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewReleasesBanner, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.NewReleasesBanner, "", new { @type = "file" })
+        @Html.ValidationMessageFor(model => model.NewReleasesBanner, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-default">Submit Customisation Edit</button>
+        </div>
+    </div>
+</div>
+    <div class="col-md-5">
+        @{Html.RenderAction("FrontCategoriesSelection", "Admin", new { selected1 = Model.FrontCategoryBanner1Id, selected2 = Model.FrontCategoryBanner2Id, selected3 = Model.FrontCategoryBanner3Id });}
+    </div>
+}

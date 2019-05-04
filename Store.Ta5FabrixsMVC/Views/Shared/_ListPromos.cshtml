@@ -1,0 +1,29 @@
+﻿@model List<Store.Model.Models.Promo>
+List of all promos!
+<div class="row">
+    <div class="col-md-12">
+        <table class="tableofdetail">
+            <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Discount &#8364;</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Time Left</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td class="detail">@p.Product.Name</td>
+                    <td class="detail">@p.Product.Size</td>
+                    <td class="detail">&#8364;@p.PromoPriceEU</td>
+                    <td class="detail">@p.StartDate</td>
+                    <td class="detail">@p.EndDate</td>
+                    <td class="detail">@{var timeLeft = p.EndDate.Subtract(p.StartDate);} @if (p.StartDate > DateTime.Now) { <span>Promo has not begun yet!</span> } else { @timeLeft }</td>
+                    <td class="text-center"><a href="@Url.Action("RemovePromo","Admin",new { PromoId = p.ProductId })"><i class="fa fa-remove detail"></i></a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
