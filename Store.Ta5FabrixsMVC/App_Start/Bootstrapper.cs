@@ -30,11 +30,11 @@ namespace Store.Ta5FabrixsMVC
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
             // Repositories
-            builder.RegisterAssemblyTypes(typeof(GadgetRepository).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ProductRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerRequest();
             // Services
-            builder.RegisterAssemblyTypes(typeof(GadgetService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ProductService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 

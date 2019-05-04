@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace Store.Ta5FabrixsMVC.Controllers
 {
-    //[RequireHttps]
     public class HomeController : Controller
     {
         public IProductCategoryService CategoryService;

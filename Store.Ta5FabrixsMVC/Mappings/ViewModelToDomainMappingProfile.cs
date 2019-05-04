@@ -19,13 +19,6 @@ namespace Store.Ta5FabrixsMVC
 
         protected override void Configure()
         {
-            Mapper.CreateMap<GadgetFormViewModel, Gadget>()
-                .ForMember(g => g.Name, map => map.MapFrom(vm => vm.GadgetTitle))
-                .ForMember(g => g.Description, map => map.MapFrom(vm => vm.GadgetDescription))
-                .ForMember(g => g.Price, map => map.MapFrom(vm => vm.GadgetPrice))
-                .ForMember(g => g.Image, map => map.MapFrom(vm => vm.File.FileName))
-                .ForMember(g => g.CategoryID, map => map.MapFrom(vm => vm.GadgetCategory));
-
             Mapper.CreateMap<ProductViewModel, Product>()
                 .ForMember(g => g.Id, map => map.MapFrom(vm => vm.Id))
                 .ForMember(g => g.Name, map => map.MapFrom(vm => vm.Name))

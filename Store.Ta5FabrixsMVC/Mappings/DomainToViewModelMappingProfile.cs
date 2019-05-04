@@ -19,8 +19,6 @@ namespace Store.Ta5FabrixsMVC
 
         protected override void Configure()
         {
-            Mapper.CreateMap<Category,CategoryViewModel>();
-            Mapper.CreateMap<Gadget, GadgetViewModel>();
             Mapper.CreateMap<Product, ProductViewModel>();
             Mapper.CreateMap<ItemTag, ItemTagViewModel>();
             Mapper.CreateMap<Image, ImageViewModel>();

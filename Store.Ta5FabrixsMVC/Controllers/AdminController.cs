@@ -14,7 +14,6 @@ using System.Web.Mvc;
 namespace Store.Ta5FabrixsMVC.Controllers
 {
     [Authorize]
-    //[RequireHttps]
     public class AdminController : Controller
     {
         public IProductService ProductService { get; set; }
@@ -141,8 +140,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
         {
             return PartialView("~/Views/Shared/_ListCategories.cshtml", CategoryService.GetProductCategories());
         }
-
-        // GET: Admin
+        
         public ActionResult Items(String Category = "", String errorMessage = "NoErrors")
         {
             if (checkIfAdmin())
@@ -166,7 +164,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
             return PartialView("~/Views/Shared/_AdminOptionsMenu.cshtml", categories);
         }
 
-        // GET: Admin / CreateItem
         [ChildActionOnly]
         [HttpGet]
         public ActionResult CreateItem(String Category = "")
@@ -178,7 +175,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
             return PartialView("~/Views/Shared/_CreateItem.cshtml", productModel);
         }
 
-        // POST: Admin / CreateItem
         [HttpPost]
         public ActionResult CreateItem(Product product)
         {
@@ -210,7 +206,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 }
                 foreach (HttpPostedFileBase file in product.Files)
                 {
-                    //Checking file is available to save.  
                     if (file != null)
                     {
                         var InputFileName = Path.GetFileName(file.FileName);
@@ -225,9 +220,9 @@ namespace Store.Ta5FabrixsMVC.Controllers
                                         InputFileName;
                         var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/ProductImages/") + InputFileName);
                         product.Images.Add(new Image(InputFileName));
-                        //Save file to server folder  
+
                         file.SaveAs(ServerSavePath);
-                        //assigning file uploaded status to ViewBag for showing message to user.  
+
                         ViewBag.UploadStatus = product.Files.Count().ToString() + " files uploaded successfully.";
                     }
 
@@ -265,7 +260,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 product.TagsText += tag.TagName + ",";
             }
             product.TagsText = product.TagsText.Trim().Substring(0, product.TagsText.Length - 1);
-            //throw new Exception(product.TagsText); FIXED!
+            
             var viewModelProduct = Mapper.Map<Product, ProductViewModel>(product);
             return Json(viewModelProduct, JsonRequestBehavior.AllowGet);
         }
@@ -279,7 +274,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
         [HttpGet]
         public PartialViewResult EditCategory()
         {
-            //var productModel = ProductService.GetProduct(id);
             return PartialView("~/Views/Shared/_EditCategory.cshtml");
         }
 
@@ -290,8 +284,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
 
             realCategory.Name = updatingCategory.Name;
             
-            //var productModel = ProductService.GetProduct(id);
-
             try
             {
                 if (updatingCategory.File != null)
@@ -301,9 +293,9 @@ namespace Store.Ta5FabrixsMVC.Controllers
                     InputFileName = "Category" + updatingCategory.Id + ".jpg";
                     var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/CategoryImages/") + InputFileName);
                     realCategory.UrlImage = InputFileName;
-                    //Save file to server folder  
+          
                     updatingCategory.File.SaveAs(ServerSavePath);
-                    //assigning file uploaded status to ViewBag for showing message to user.  
+          
                     ViewBag.UploadStatus = "1 file uploaded successfully.";
                 }
             }
@@ -321,7 +313,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
         [HttpGet]
         public PartialViewResult EditItem()
         {
-            //var productModel = ProductService.GetProduct(id);
             return PartialView("~/Views/Shared/_EditItem.cshtml");
         }
 
@@ -344,7 +335,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
             updatingProduct.Quantity = product.Quantity;
             updatingProduct.Size = product.Size;
 
-            //product.Images = ProductService.GetProduct(product.Id).Images;
             product.Tags = new List<ItemTag>();
             var productTags = product.TagsText
                                     .Trim()
@@ -371,7 +361,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
 
             foreach (HttpPostedFileBase file in product.Files)
             {
-                //Checking file is available to save.  
                 if (file != null)
                 {
                     var InputFileName = Path.GetFileName(file.FileName);
@@ -386,14 +375,14 @@ namespace Store.Ta5FabrixsMVC.Controllers
                                     InputFileName;
                     var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/ProductImages/") + InputFileName);
                     updatingProduct.Images.Add(new Image(InputFileName));
-                    //Save file to server folder  
+            
                     file.SaveAs(ServerSavePath);
-                    //assigning file uploaded status to ViewBag for showing message to user.  
+            
                     ViewBag.UploadStatus = product.Files.Count().ToString() + " files uploaded successfully.";
                 }
 
             }
-            //product.Tags = ProductService.GetProduct(product.Id).Tags;
+
             try
             {
                 ProductService.UpdateProduct(updatingProduct);
@@ -412,11 +401,10 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 }
                 throw new Exception(error);
             }
-            //var productModel = ProductService.GetProduct(id);
+ 
             return RedirectToAction("Index", new { Category = updatingProduct.Category.Name });
         }
 
-        // POST: Admin / DeleteItem
         public ActionResult Remove(int Id)
         {
             ProductService.RemoveProduct(Id);
@@ -463,9 +451,9 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 var InputFileName = "Banner1.jpg";
                 var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/FrontImages/") + InputFileName);
                 layout.Banner1Url = InputFileName;
-                //Save file to server folder  
+    
                 layout.Banner1.SaveAs(ServerSavePath);
-                //assigning file uploaded status to ViewBag for showing message to user.  
+    
                 ViewBag.UploadStatus = "File uploaded successfully.";
             }
             if (layout.Banner2 != null)
@@ -473,7 +461,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 var InputFileName = "Banner2.jpg";
                 var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/FrontImages/") + InputFileName);
                 layout.Banner2Url = InputFileName;
-                //Save file to server folder  
+    
                 layout.Banner2.SaveAs(ServerSavePath);
             }
             if (layout.Banner3 != null)
@@ -481,7 +469,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 var InputFileName = "Banner3.jpg";
                 var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/FrontImages/") + InputFileName);
                 layout.Banner3Url = InputFileName;
-                //Save file to server folder  
+       
                 layout.Banner3.SaveAs(ServerSavePath);
             }
             if (layout.NewReleasesBanner != null)
@@ -489,7 +477,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 var InputFileName = "NewReleases.jpg";
                 var ServerSavePath = Path.Combine(Server.MapPath("~/Content/Images/FrontImages/") + InputFileName);
                 layout.NewReleasesBannerUrl = InputFileName;
-                //Save file to server folder  
+
                 layout.NewReleasesBanner.SaveAs(ServerSavePath);
             }
 
@@ -632,7 +620,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
         {
             string path = System.Web.HttpContext.Current.Server.MapPath("~/Content/Images/ProductImages/" + name);
             FileInfo file = new FileInfo(path);
-            if (file.Exists)//check file exsit or not
+            if (file.Exists)
             {
                 file.Delete();
             }

@@ -12,7 +12,6 @@ using System.Web.Mvc;
 
 namespace Store.Ta5FabrixsMVC.Controllers
 {
-    //[RequireHttps]
     public class CatalogueController : Controller
     {
         public IProductCategoryService CategoryService { get; set; }
@@ -39,8 +38,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
             this.UserService = userService;
             this.ProductsInCartService = productsInCartService;
         }
-
-        // GET: Catalogue
+        
         public ActionResult Index(string Collection = "", string sortingType = "")
         {
             CategorySortingType cst = new CategorySortingType();
@@ -102,44 +100,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 return RedirectToAction("Cart","Manage");
             }
         }
-
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Checkout([Bind(Include = "FirstName,LastName,Address,City,Region,Country,ZipCode,Phone,PromoCode,PaymentMethod")]UserDetails details)
-        {
-            if (ModelState.IsValid)
-            {
-                Cart cartOfUser = UserService.GetApplicationUser(User.Identity.GetUserId()).Cart;
-                if (cartOfUser.ProductsInCart.Count > 0)
-                {
-                    Order newOrder = new Order(cartOfUser, details);
-                    // Ottuk natam v drugiq method.
-                    try
-                    {
-                        CreateAndSaveOrder(newOrder);
-                        return RedirectToAction("Index", "Manage");
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        var errorfeed = "";
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            errorfeed += String.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                errorfeed += String.Format("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw new Exception(errorfeed);
-                    }
-                    return RedirectToAction("Index", "Manage");
-
-                }
-            }            
-            return View(details);
-        }*/
 
         public void CreateAndSaveOrder(Order newOrder)
         {
@@ -212,7 +172,7 @@ namespace Store.Ta5FabrixsMVC.Controllers
                 {
                     newOrder = ApplyPromoCode(newOrder, details.PromoCode);
                 }
-                // Ottuk natam v drugiq method.
+                
                 try
                 {
                     CreateAndSaveOrder(newOrder);
@@ -252,14 +212,13 @@ namespace Store.Ta5FabrixsMVC.Controllers
 
             return order;
         }
-        // GET: Catalogue
+       
         public ActionResult NewReleases()
         {
             var newItems = ProductService.GetNewProducts();
             return View(newItems);
         }
 
-        // GET: Catalogue
         public ActionResult Search(string For = "")
         {
             var newItems = ProductService.GetProductsByName(For);
@@ -289,21 +248,18 @@ namespace Store.Ta5FabrixsMVC.Controllers
             return Json("Success!",JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Catalogue
         public ActionResult Sale()
         {
             var promotions = PromosService.GetEndingPromos();
             return View(promotions);
         }
 
-        // GET: Item
         public ActionResult Item(int id)
         {
             var item = ProductService.GetProduct(id);
             return View(item);
         }
 
-        // GET: ListSizes
         [HttpGet]
         public PartialViewResult ListSizes(string Name)
         {
@@ -326,17 +282,12 @@ namespace Store.Ta5FabrixsMVC.Controllers
             return Json("Thanks for subscribing!", JsonRequestBehavior.AllowGet);
         }
 
-        // POST: ListSizes 
         [HttpPost]
         public ActionResult ListSizes(int ProdId, int Quantity)
         {
             ProductInCart productInCart = new ProductInCart();
             Product actualProduct = ProductService.GetProduct(ProdId);
-            //productInCart.SinglePrice = actualProduct.PriceEU;
-            //if(actualProduct.Promo != null)
-            //{
-            //    productInCart.SinglePrice = actualProduct.Promo.PromoPriceEU;
-            //}
+
             productInCart.ProductId = ProdId;
             productInCart.Quantity = Quantity;
             productInCart.SubtotalForProduct = Decimal.Multiply(productInCart.Quantity,actualProduct.PriceEU);
@@ -431,10 +382,6 @@ namespace Store.Ta5FabrixsMVC.Controllers
                     }
                 }
                 return RedirectToAction("Cart", "Manage");
-                // CHECK FOR COOKIES
-                // IF NO COOKIE THAN CREATE ONE
-                // DO THE COOKIE STUFF
-                // PUT ALL OF THIS IN A FUNCTION FOR ALL TO USE
             }
             return RedirectToAction("Cart", "Manage");
         }

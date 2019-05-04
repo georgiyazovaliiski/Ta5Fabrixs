@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Store.Data.Configuration;
 using Store.Model;
 using Store.Model.Models;
 using System;
@@ -24,10 +23,6 @@ namespace Store.Data
             return new StoreEntities();
         }
 
-        /* REMOVE WHEN PROJECT IS DONE */
-        public DbSet<Gadget> Gadgets { get; set; }
-        public DbSet<Category> Categories { get; set; }
-
         public DbSet<CookieCart> CookieCarts { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
@@ -51,8 +46,6 @@ namespace Store.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new GadgetConfiguration());
-            modelBuilder.Configurations.Add(new CategoryConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

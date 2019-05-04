@@ -57,9 +57,7 @@
     <Compile Include="IServices\IUserDetailsService.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\CartService.cs" />
-    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CookieCartService.cs" />
-    <Compile Include="Services\GadgetService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\LayoutService.cs" />

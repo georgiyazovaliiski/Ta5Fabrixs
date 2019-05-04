@@ -77,11 +77,9 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CookieCart.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategorySortingType.cs" />
     <Compile Include="Models\Cryptor.cs" />
     <Compile Include="Models\Email.cs" />
-    <Compile Include="Models\Gadget.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ItemTag.cs" />
     <Compile Include="Models\LayoutModel.cs" />
