@@ -1,3 +1,6 @@
+Store.Ta5FabrixsMVC/Scripts/* linguist-vendored=true
+packages/* linguist-vendored=true
+.vs/* linguist-vendored=true
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
@@ -61,8 +64,3 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-
-
-Store.Ta5FabrixsMVC/Scripts/* linguist-vendored=true
-packages/* linguist-vendored=true
-.vs/* linguist-vendored=true
